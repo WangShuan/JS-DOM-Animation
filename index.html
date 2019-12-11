@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>關於運動</title>
+    <script src="./fn.js"></script>
+    <style>
+        h3 {
+            color: red;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            left: 0;
+        }
+
+        #line {
+            width: 1px;
+            height: 100px;
+            background-color: rgb(252, 0, 0);
+            position: absolute;
+            left: 300px;
+        }
+
+        #content {
+            width: 100px;
+            height: 120px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 315px;
+            text-align: center;
+            left: -100px;
+        }
+
+        #content a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            line-height: 30px;
+        }
+
+        #title {
+            width: 30px;
+            height: 60px;
+            background: black;
+            color: white;
+            position: absolute;
+            left: 100px;
+            top: 25px;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+        .mt {
+            height: 150px;
+            width: 200px;
+        }
+
+        #img {
+            width: 400px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        #view1 {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            left: 0;
+        }
+
+        #line2 {
+            width: 1px;
+            height: 200px;
+            background-color: rgb(252, 0, 0);
+            position: absolute;
+            left: 300px;
+        }
+
+        #view2 {
+            margin-top: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            left: 600px;
+        }
+
+        #view3 {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            left: 0;
+        }
+
+        #line3 {
+            width: 1px;
+            height: 200px;
+            background-color: rgb(252, 0, 0);
+            position: absolute;
+            left: 300px;
+        }
+
+        #view4 {
+            margin-top: 100px;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            left: 600px;
+        }
+
+        #box2,
+        #box3,
+        #box4,
+        #box5,
+        #box6 {
+            width: 100px;
+            height: 50px;
+            background-color: black;
+        }
+
+        .box {
+            background-color: brown !important;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+        }
+
+        #move1,
+        #move2,
+        #move3,
+        #move4 {
+            width: 100px;
+            height: 100px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 100px;
+            background-color: rgb(71, 1, 71);
+            color: rgb(252, 249, 248);
+            float: left;
+        }
+
+        .move {
+            margin: 20px;
+        }
+
+        ul {
+            width: 730px;
+            height: 150px;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            width: 240px;
+            height: 150px;
+            position: relative;
+            list-style: none;
+            float: left;
+            padding: 0;
+            margin: 0;
+        }
+
+        li img {
+            width: 240px;
+            height: 150px;
+        }
+
+        li p {
+            width: 230px;
+            position: absolute;
+            left: 5px;
+            background: gray;
+            color: white;
+            bottom: 5px;
+            line-height: 14px;
+            font-size: 14px;
+            margin: 0;
+
+            /* 默认是不显示*/
+            height: 0;
+            overflow: hidden;
+        }
+
+        #box7 {
+            width: 100px;
+            height: 100px;
+            background-color: blueviolet;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        #box8 {
+            width: 100px;
+            height: 100px;
+            background-color: forestgreen;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        #box9 {
+            width: 100px;
+            height: 100px;
+            background-color: royalblue;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        #ball {
+            width: 20px;
+            height: 20px;
+            border-radius: 15px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 3px solid snow;
+        }
+
+        #box10 {
+            width: 200px;
+            height: 180px;
+            background-color: black;
+            position: relative;
+        }
+
+        #ball2 {
+            width: 20px;
+            height: 20px;
+            border-radius: 15px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 3px solid snow;
+        }
+
+        #box11 {
+            width: 200px;
+            height: 280px;
+            background-color: black;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>有一個按鈕 一個 div 一條線</h3>
+    點擊按鈕讓 div 等速度移動到線之後停止<br><br>
+    <input id="bt" type="button" value="move">
+    <br><br>
+    <div id="box"></div>
+    <div id="line"></div>
+
+    <script>
+        $(function () {
+            var speed = 10 // 速度
+            var timer = null
+            $('bt').onclick = function () {
+                clearInterval(timer) // 每次點擊都先清空時鐘
+
+                timer = setInterval(function () {
+                    if ($('box').offsetLeft == 300) {
+                        clearInterval(timer)
+                    } else {
+                        $('box').style.left = $('box').offsetLeft + speed + 'px'
+                    }
+                }, 100)
+
+            }
+        })
+    </script>
+
+    <h3 style="margin-top: 120px;">封裝運動函數(startMove)</h3>
+    滑鼠移入/移出 讓'分享到'區塊動態滑入/滑出<br>
+    <div class="mt">
+        <div id="content">
+            <a href="#">LINE keep</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Messenger</a>
+
+            <div id="title">
+                分享到
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var timer = null
+
+        // #content left: 100px 顯示
+        $('content').onmouseover = function () {
+            startMove(this, 0)
+        }
+        $('content').onmouseout = function () {
+            startMove(this, -100)
+        }
+    </script>
+
+    <h3>圖片淡入淡出</h3>
+    滑鼠移入/移出 讓圖片透明度動態淡入/淡出<br><br>
+    <img id="img" src="./img/background.jpg" alt="">
+
+    <script>
+        var timer = null
+        var alpha = 30
+
+        $('img').onmouseover = function () {
+            startMove2(this, 100)
+        }
+        $('img').onmouseout = function () {
+            startMove2(this, 30)
+        }
+
+        function startMove2(obj, target) {
+            clearInterval(timer)
+
+            var speed = 10
+            speed = alpha < target ? speed : -speed
+
+            timer = setInterval(function () {
+                if (alpha == target) {
+                    clearInterval(timer)
+                } else {
+                    alpha += speed
+                    obj.style.opacity = alpha / 100
+                    obj.style.filter = 'alpha(opacity=' + alpha + ');'
+                }
+            }, 50)
+        }
+    </script>
+
+    <h3>緩衝運動</h3>
+    點擊方塊使其移動到線後，一開始比較快然後變慢最後停止<br><br>
+    <div id="view1"></div>
+    <div id="line2"></div>
+    <div id="view2"></div>
+    <script>
+        $('view1').onclick = function () {
+            startMove3(this, 300)
+        }
+        $('view2').onclick = function () {
+            startMove3(this, 200)
+        }
+
+        var timer = null
+
+        function startMove3(obj, target) {
+            clearInterval(timer)
+
+            timer = setInterval(function () {
+                // 設速度為 (目標點 - 當前位置) / 縮放係數，則越靠近目標點速度就會越慢
+                var speed = (target - obj.offsetLeft) / 7
+
+                // 因除完的速度會帶有小數 造成代碼一直重複執行 
+                // 所以我們用 ceil 向上取整 或 floor 向下取整 讓速度最後歸零停止定時器
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+                if (obj.offsetLeft == target) {
+                    clearInterval(timer)
+                } else {
+                    obj.style.left = obj.offsetLeft + speed + 'px'
+                }
+            }, 100)
+        }
+    </script>
+
+    <h3 style="margin-top: 220px">勻速運動</h3>
+    點擊方塊，當物體位置已經非常接近目標值時 直接讓物體位置等於目標值 並停止運動<br><br>
+    <div id="view3"></div>
+    <div id="line3"></div>
+    <div id="view4"></div>
+
+    <script>
+        $('view3').onclick = function () {
+            startMove4(this, 300)
+        }
+        $('view4').onclick = function () {
+            startMove4(this, 200)
+        }
+
+        var timer = null
+
+        function startMove4(obj, target) {
+            clearInterval(timer)
+
+            timer = setInterval(function () {
+                var speed = 7
+                speed = obj.offsetLeft < target ? speed : -speed
+
+                // 因為有可能是負數 所以直接用 abs 取絕對值
+                if (Math.abs(target - obj.offsetLeft) < Math.abs(speed)) {
+                    obj.style.left = target + 'px'
+                    clearInterval(timer)
+                } else {
+                    obj.style.left = obj.offsetLeft + speed + 'px'
+                }
+            }, 50)
+        }
+    </script>
+
+    <h3 style="margin-top: 220px">使用緩衝運動讓物體變寬(僅單個物體)</h3>
+    滑鼠移入/移出看效果<br><br>
+    <div id="box2"></div>
+    <script>
+        $('box2').onmouseover = function () {
+            startMove5(this, 300)
+        }
+
+        $('box2').onmouseout = function () {
+            startMove5(this, 100)
+        }
+
+        function startMove5(obj, target) {
+            clearInterval(timer)
+
+            timer = setInterval(function () {
+                var speed = (target - obj.offsetWidth) / 7
+
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+                if (obj.offsetWidth == target) {
+                    clearInterval(timer)
+                } else {
+                    obj.style.width = obj.offsetWidth + speed + 'px'
+                }
+            }, 100)
+        }
+    </script>
+
+    <h3>使用緩衝運動讓物體變寬(有多個物體時)</h3>
+    滑鼠移入/移出看效果<br>
+    當有多個物體時 就不能只在外定義一個時鐘<br>
+    必須給每個物體各自都添加一個時鐘 這樣才不會互相干擾<br><br>
+    <div class="box" id="box3">box3</div><br>
+    <div id="box4" class="box">box4</div><br>
+    <div id="box5" class="box">box5</div><br>
+    <div id="box6" class="box">box6</div><br>
+    <script>
+        var aBox = document.getElementsByClassName('box')
+        for (i = 0; i < aBox.length; i++) {
+            aBox[i].onmouseover = function () {
+                startMove6(this, 300)
+            }
+
+            aBox[i].onmouseout = function () {
+                startMove6(this, 100)
+            }
+
+            aBox[i].timer = null
+        }
+
+        function startMove6(obj, target) {
+            clearInterval(obj.timer)
+
+            obj.timer = setInterval(function () {
+                var speed = (target - obj.offsetWidth) / 7
+
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+                if (obj.offsetWidth == target) {
+                    clearInterval(obj.timer)
+                } else {
+                    obj.style.width = obj.offsetWidth + speed + 'px'
+                }
+            }, 100)
+        }
+    </script>
+
+    <h3>任意值變化的封裝</h3>
+    滑鼠移入/移出看效果<br><br>
+    <div class="move" id="move1">寬度的變化</div>
+    <div class="move" id="move2">高度的變化</div>
+    <div class="move" id="move3">字體大小的變化</div>
+
+    <script>
+        var aMove = document.getElementsByClassName('move')
+        var arr = ['width', 'height', 'font-size']
+        var arr2 = [100, 100, 14]
+
+        for (i = 0; i < aMove.length; i++) {
+            aMove[i].i = i
+            aMove[i].timer = null
+
+            aMove[i].onmouseover = function () {
+                startMove7(this, arr[this.i], 150)
+            }
+
+            aMove[i].onmouseout = function () {
+                startMove7(this, arr[this.i], arr2[this.i])
+            }
+
+        }
+
+        function startMove7(obj, att, target) {
+            clearInterval(obj.timer)
+
+            obj.timer = setInterval(function () {
+                var speed = (target - parseInt(getS(obj, att))) / 7
+
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed)
+
+                if (parseInt(getS(obj, att)) == target) {
+                    clearInterval(obj.timer)
+                } else {
+                    obj.style[att] = parseInt(getS(obj, att)) + speed + 'px'
+                }
+            }, 100)
+        }
+    </script>
+
+    <h3 style="margin-top: 220px;">圖片詳情展示</h3>
+    滑鼠移入/移出看效果<br><br>
+    <ul>
+        <li>
+            <a href="#">
+                <img src="./img/b1.jpg" alt="">
+                <p>
+                    //HTML1学习:<br />
+                    本课程由浅入深，逐步推进，以实例为主线，详细完整的介绍新功能以及新特性~~~~~~
+                </p>
+            </a>
+        </li>
+        <li style="margin: 0 5px;">
+            <a href="#">
+                <img src="./img/b2.jpg" alt="">
+                <p>
+                    //HTML2学习:<br />
+                    本课程由浅入深，逐步推进，以实例为主线，详细完整的介绍新功能以及新特性~~~~~~
+                </p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="./img/b3.jpg" alt="">
+                <p>
+                    //HTML3学习:<br />
+                    本课程由浅入深，逐步推进，以实例为主线，详细完整的介绍新功能以及新特性~~~~~~
+                </p>
+            </a>
+        </li>
+    </ul>
+    <script>
+        var aLi = document.getElementsByTagName('li')
+
+        for (i = 0; i < aLi.length; i++) {
+            aLi[i].onmouseover = function () {
+                var oP = this.getElementsByTagName('p')[0]
+                goMove(oP, 'height', 56)
+            }
+            aLi[i].onmouseout = function () {
+                var oP = this.getElementsByTagName('p')[0]
+                goMove(oP, 'height', 0)
+            }
+        }
+    </script>
+
+    <h3>鏈式運動(在運動函數中添加回調函數)</h3>
+    有一個 div 點擊後先讓他寬度運動到300 再讓他高度運動到300 最後讓他透明度為100 <br><br>
+    <div id="box7"></div>
+    <script>
+        $('box7').onclick = function () {
+            chainMove($('box7'), 'width', 300, function () {
+                chainMove($('box7'), 'height', 300, function () {
+                    chainMove($('box7'), 'opacity', 100)
+                })
+            })
+        }
+    </script>
+
+    <h3>關於JSON數據格式(待會用來完善鏈式運動)</h3>
+    JSON是一個對象 他使用的方式是鍵對值(key-value)
+    <script>
+        var json = {
+            name: '李四',
+            sex: '男',
+            age: 18
+        }
+
+        for (key in json) {
+            console.log(key)
+            console.log(json[key])
+        }
+    </script>
+
+    <h3>用 JSON 數據格式來設置樣式</h3>
+    定義一個函數 setStyle() 設置樣式<br>
+    裡面傳入對象和屬性 其中屬性使用 JSON <br>
+    點擊後讓他一次同時更改多個樣式<br><br>
+    <div id="box8"></div>
+    <script>
+        var json = {
+            width: '300px',
+            height: '300px',
+            backgroundColor: 'teal',
+            opacity: '100'
+        }
+
+        $('box8').onclick = function () {
+            setStyle(this, json)
+        }
+
+        function setStyle(obj, attJSON) {
+            for (key in attJSON) {
+                obj.style[key] = attJSON[key]
+            }
+        }
+    </script>
+
+    <h3>完美運動</h3>
+    點擊 div 同時更改高度寬度透明度<br><br>
+    <div id="box9"></div>
+    <script>
+        var json2 = {
+            width: 200,
+            height: 30,
+            opacity: 100
+        }
+
+        $('box9').onclick = function () {
+            perfectMove(this, json2)
+        }
+    </script>
+
+    <h3>碰撞運動</h3>
+    點擊黑色區塊讓球球運動，碰到邊邊會反彈<br><br>
+    <div id="box10">
+        <div id="ball"></div>
+    </div>
+    <script>
+        $('box10').onclick = function () {
+            // 設定移動方向的速度
+            var speedX = 8
+            var speedY = 8
+
+            // 獲取球的寬高
+            var viewW = $('ball').offsetWidth
+            var viewH = $('ball').offsetHeight
+
+            setInterval(function () {
+                // 動態獲取可碰撞區塊的大小
+                var divW = $('box10').clientWidth
+                var divH = $('box10').clientHeight
+
+                // 預先計算位置
+                var offsetTop = $('ball').offsetTop + speedY
+                var offsetLeft = $('ball').offsetLeft + speedX
+
+                // 垂直方向
+                if (offsetTop >= divH - viewH) { // 碰到地板時
+                    speedY = -speedY
+                    offsetTop = divH - viewH
+                } else if (offsetTop <= 0) { // 碰到最上面
+                    speedY = -speedY
+                    offsetTop = 0
+                }
+
+                // 水平方向
+                if (offsetLeft >= divW - viewW) { // 碰到最右
+                    speedX = -speedX
+                    offsetLeft = divW - viewW
+                } else if (offsetLeft <= 0) { // 碰到最左
+                    speedX = -speedX
+                    offsetLeft = 0
+                }
+
+                $('ball').style.left = offsetLeft + 'px'
+                $('ball').style.top = offsetTop + 'px'
+
+            }, 50)
+        }
+    </script>
+
+    <h3>碰撞運動(添加重力效果)</h3>
+    點擊黑色區塊讓球球運動，碰到邊邊會反彈<br>
+    且因有重力加速度的效果，球球會越彈越慢最後停下來<br><br>
+    <div id="box11">
+        <div id="ball2"></div>
+    </div>
+    <script>
+        var timer = null
+        $('box11').onclick = function () {
+            // 設定移動方向的速度
+            var speedX = 8
+            var speedY = 8
+
+            // 獲取球的寬高
+            var viewW = $('ball2').offsetWidth
+            var viewH = $('ball2').offsetHeight
+
+            timer = setInterval(function () {
+                // 添加重力
+                speedY = speedY + 1.3
+
+                // 動態獲取可碰撞區塊的大小
+                var divW = $('box11').clientWidth
+                var divH = $('box11').clientHeight
+
+                // 預先計算位置
+                var offsetTop = $('ball2').offsetTop + speedY
+                var offsetLeft = $('ball2').offsetLeft + speedX
+
+                // 垂直方向
+                if (offsetTop >= divH - viewH) { // 碰到地板時
+                    // 因為重力的關係 碰到底部後速度會越來越小
+                    speedY = speedY * -0.9 // 要改變方向要乘以負數
+                    speedX = speedX * 0.9 // 不用改變方向所以直接乘以小數就好
+
+                    offsetTop = divH - viewH
+                } else if (offsetTop <= 0) { // 碰到最上面
+                    speedY = speedY * -0.9 // 要改變方向要乘以負數
+                    speedX = speedX * 0.9 // 不用改變方向所以直接乘以小數就好
+
+                    offsetTop = 0
+                }
+
+                // 水平方向
+                if (offsetLeft >= divW - viewW) { // 碰到最右
+                    speedX = -speedX * 0.9
+                    speedY = speedY * 0.9
+
+                    offsetLeft = divW - viewW
+                } else if (offsetLeft <= 0) { // 碰到最左
+                    speedX = -speedX * 0.9
+                    speedY = speedY * 0.9
+
+                    offsetLeft = 0
+                }
+
+                if (Math.abs(speedX) < 1) { // 處理小數點 當絕對值最接近零 就讓他歸零
+                    speedX = 0
+                }
+
+                if (Math.abs(speedY) < 1) { // 處理小數點 當絕對值最接近零 就讓他歸零
+                    speedY = 0
+                }
+
+                if (speedX == 0 && speedY == 0) { // 判斷當速度都靜止時表示不會再動了 此時就停止時鐘
+                    clearInterval(timer)
+                } else { // 不然就繼續讓他彈跳
+                    $('ball2').style.left = offsetLeft + 'px'
+                    $('ball2').style.top = offsetTop + 'px'
+                }
+
+            }, 50)
+        }
+    </script>
+</body>
+
+</html>
